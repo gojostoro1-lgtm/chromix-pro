@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <!-- إعدادات متوافقة مع WebView Android -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#6366f1">
+    <meta name="color-scheme" content="light">
+    
+    <title>Chromix · أداة الألوان الاحترافية</title>
+    
+    <!-- ربط ملفات التنسيقات -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Preload الخطوط المحلية -->
+    <link rel="preload" href="assets/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/Inter-Medium.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/Inter-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/Inter-Bold.woff2" as="font" type="font/woff2" crossorigin>
+</head>
+<body>
+    <!-- حاوية التطبيق الرئيسية - ستحول إلى WebView -->
+    <div class="app-wrapper">
+        
+        <!-- ========== HEADER مع الشعار ========== -->
+        <header class="app-header">
+            <div class="header-content">
+                <!-- الشعار SVG أو PNG -->
+                <div class="logo-wrapper">
+                    <img src="assets/images/logo.png" 
+                         alt="Chromix Logo" 
+                         class="logo" 
+                         width="128" 
+                         height="128"
+                         loading="eager">
+                </div>
+                <div class="brand-text">
+                    <h1>Chromix</h1>
+                    <p class="brand-sub">Color Harmony Studio</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- ========== MAIN CONTENT ========== -->
+        <main class="main-content">
+            
+            <!-- ========== قسم اختيار اللون المتقدم ========== -->
+            <section class="color-picker-section glass-card">
+                <div class="section-title">
+                    <!-- أيقونة SVG محلية -->
+                    <img src="assets/icons/color-picker.svg" alt="" class="section-icon">
+                    <h2>اللون الأساسي</h2>
+                </div>
+                
+                <div class="picker-container">
+                    <!-- طريقة 1: إدخال HEX -->
+                    <div class="input-group">
+                        <div class="input-label">
+                            <img src="assets/icons/hex.svg" alt="" class="input-icon">
+                            <span>HEX</span>
+                        </div>
+                        <input type="text" 
+                               id="hexInput" 
+                               class="color-input" 
+                               value="#6366F1" 
+                               maxlength="7"
+                               placeholder="#RRGGBB">
+                    </div>
+
+                    <!-- طريقة 2: عجلة الألوان التفاعلية -->
+                    <div class="input-group">
+                        <div class="input-label">
+                            <img src="assets/icons/rgb.svg" alt="" class="input-icon">
+                            <span>Color Wheel</span>
+                        </div>
+                        <div class="wheel-preview" id="wheelPreview">
+                            <!-- عجلة الألوان ستتحمل هنا ديناميكياً -->
+                            <input type="color" id="colorWheel" value="#6366F1">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- عرض قيم RGB مباشرة -->
+                <div class="color-values" id="colorValues">
+                    RGB: 99, 102, 241
+                </div>
+            </section>
+
+            <!-- ========== أنظمة التناسق اللوني ========== -->
+            <section class="schemes-section">
+                
+                <!-- الصف الأول: Monochromatic + Complementary + Triadic -->
+                <div class="schemes-row">
+                    
+                    <!-- بطاقة Monochromatic -->
+                    <article class="scheme-card">
+                        <div class="card-header">
+                            <h3>Monochromatic</h3>
+                            <span class="scheme-desc">أحادي اللون</span>
+                        </div>
+                        <div class="color-grid" id="monochromaticGrid"></div>
+                    </article>
+
+                    <!-- بطاقة Complementary -->
+                    <article class="scheme-card">
+                        <div class="card-header">
+                            <h3>Complementary</h3>
+                            <span class="scheme-desc">متكامل</span>
+                        </div>
+                        <div class="color-grid" id="complementaryGrid"></div>
+                    </article>
+
+                    <!-- بطاقة Triadic -->
+                    <article class="scheme-card">
+                        <div class="card-header">
+                            <h3>Triadic</h3>
+                            <span class="scheme-desc">ثلاثي</span>
+                        </div>
+                        <div class="color-grid" id="triadicGrid"></div>
+                    </article>
+                </div>
+
+                <!-- الصف الثاني: Tetradic + Analogous -->
+                <div class="schemes-row">
+                    
+                    <!-- بطاقة Tetradic -->
+                    <article class="scheme-card">
+                        <div class="card-header">
+                            <h3>Tetradic</h3>
+                            <span class="scheme-desc">رباعي</span>
+                        </div>
+                        <div class="color-grid" id="tetradicGrid"></div>
+                    </article>
+
+                    <!-- بطاقة Analogous -->
+                    <article class="scheme-card">
+                        <div class="card-header">
+                            <h3>Analogous</h3>
+                            <span class="scheme-desc">متجاور</span>
+                        </div>
+                        <div class="color-grid" id="analogousGrid"></div>
+                    </article>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- ========== FOOTER - قسم التواصل ========== -->
+        <footer class="app-footer glass-card">
+            <div class="footer-content">
+                
+                <!-- تعريف بالمطور -->
+                <div class="developer-info">
+                    <p class="credit-text">تم تصميم وتطوير هذا التطبيق بواسطة</p>
+                    <p class="developer-name">عمـــار النهـــاري</p>
+                    <p class="developer-title">UI/UX Designer & Developer</p>
+                </div>
+
+                <!-- معلومات التواصل -->
+                <div class="contact-info">
+                    
+                    <!-- البريد الإلكتروني -->
+                    <div class="contact-item">
+                        <img src="assets/icons/email.svg" alt="" class="contact-icon">
+                        <span class="contact-value" id="emailPlaceholder">gojostoro1@gmail.com</span>
+                        <!-- سيتم تغييره لاحقاً -->
+                    </div>
+
+                    <!-- رقم الهاتف (اختياري) -->
+                    <div class="contact-item optional">
+                        <img src="assets/icons/phone.svg" alt="" class="contact-icon">
+                        <span class="contact-value">+967 776 760 386</span>
+                    </div>
+
+                    <!-- إنستجرام -->
+                    <div class="contact-item">
+                        <img src="assets/icons/instagram.svg" alt="" class="contact-icon">
+                        <span class="contact-value">@toyi_56
+                    </span>
+                    </div>
+                </div>
+
+                <!-- دعوة للتواصل -->
+                <div class="contact-cta">
+                    <p> للاقتراحات والاستفسارات  راسلني دائمًا</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ربط JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
